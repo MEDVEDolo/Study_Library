@@ -1,0 +1,74 @@
+{% extends "Core/base.html" %}
+{% load static %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+    <div class="fccc mw-950px mx-auto px-2">
+        <div class="fccs justify-content-md-center flex-md-row m-sm-0 gap-3 mx-auto">
+            <img class="h-min mx-md-0 mx-auto" src="{{ book.poster.url }}" alt="">
+            <div class="fc mx-auto mx-md-0">
+                <div class="fr gap-2">
+                    <h1 class="mb-0 me-auto text-center d-inline">{{ book.title }}</h1>
+                </div>
+                <span class="text-secondary-emphasis mt-2 mb-1">
+                    {% for category in book.categories.all %}
+                        <span>
+                            {% if forloop.first %}{{ category.name|title }}{% else %}{{ category.name }}{% endif %}{% if not forloop.last %},{% endif %}
+                        </span>
+                    {% endfor %}
+                </span>
+                {% for year in book.year.all %}
+                    <span class="me-md-auto d-inline">Год: {{ year }}</span>
+                {% endfor %}
+                <h5 class="mt-3">Описание</h5>
+                <p class="mb-3" style="text-indent: 1rem">{{ book.description }}</p>
+                <h5 class="mt-3">Цена: {{ book.price }} &#8381;</h5>
+                <form action="{% url 'buy_book' %}" method="POST" class="fr gap-1">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ book.id }}" name="book_id">
+                    {% if book.title not in book_list %}
+                        <button class="btn-send-review btn btn-success" type="submit">Купить</button>
+                    {% else %}
+                        <div class="alert alert-success" role="alert">Книга уже приобритена</div>
+                    {% endif %}
+                </form>
+                <h5 class="mt-3">Аренда</h5>
+                <form action="{% url 'rent_book' %}" method="POST" class="fr gap-1">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ book.id }}" name="book_id">
+                    {% if book.title not in book_list_rent %}
+                        <div>
+                            <input type="radio" id="huey" name="time" value="two_weeks" checked />
+                            <label for="huey">2 недели</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="huey" name="time" value="mounth"/>
+                            <label for="huey">месяц</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="huey" name="time" value="three_mounths"/>
+                            <label for="huey">3 месяца</label>
+                        </div>
+                        <button class="btn-send-review btn btn-warning" type="submit">Арендовать</button>
+                    {% else %}
+                        <div class="alert alert-success" role="alert">Книга уже арендована</div>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="mt-md-5 mt-0">
+                <div class="mb-2">
+                    <h5>Авторы</h5>
+                    <ul class="fc">
+                        {% for author in book.authors.all %}
+                            <li>
+                                <a href="{% url 'author_detail' author_id=author.id %}"
+                                   class="text-light text-opacity-75 text-nowrap">
+                                    {{ author.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'Core/base.html' %}
+{% block title %}Library | Main{% endblock %}
+{% block content %}
+    <h1 class="text-center mb-4">Main</h1>
+    <div class="fccs justify-content-md-center flex-md-row m-sm-0 gap-3 mx-auto">
+        {% for message in messages %}
+            <p class="mb-3" style="text-indent: 1rem">{{ message }}</p>
+        {% endfor %}
+        {% if not messages %}
+            <p class="mb-3" style="text-indent: 1rem">Арендованных книг нет.</p>
+        {% endif %}
+    </div>
+{% endblock %}

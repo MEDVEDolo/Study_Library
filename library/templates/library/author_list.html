@@ -1,0 +1,15 @@
+{% extends 'Core/base.html' %}
+{% block title %}Library| {{ title }}{% endblock %}
+{% block content %}
+    <h1 class="text-center mb-3">{{ title }}</h1>
+    <div class="frc flex-wrap mw-700px mx-auto gap-2">
+        {% for author in authors %}
+            <a href="{% url 'author_detail' author_id=author.id %}" 
+            class="fc gap-2 mw-150px w-100 text-light text-decoration-none hover-scale-2">
+                <img src="{{ author.photo.url }}" alt=""
+                    class="h-max">
+                <h2 class="fs-6">{{ author.name }}</h2>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

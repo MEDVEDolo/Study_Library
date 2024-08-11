@@ -1,0 +1,13 @@
+<a href="{% url 'book_detail' book_id=book.id %}" 
+    class="movie_card text-decoration-none text-light fc mw-300px w-100 hover-scale-2">
+    <img src="{{ book.poster.url }}" alt="">
+    <h3 class="mt-2">{{ book.title }}</h3>
+    <p>
+        {% for category in book.categories.all %}
+            {{ category.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {% for year in book.year.all %}
+        <span class="me-md-auto d-inline">Год: {{ year }}</span>
+    {% endfor %}
+</a>

@@ -1,0 +1,14 @@
+{% extends 'Core/base.html' %}
+{% block title %}Library | Categories{% endblock %}
+{% block content %}
+   <h1 class="text-center mb-3">Categories</h1>
+   <div class="frc flex-wrap mw-700px mx-auto gap-2">
+       {% for category in categories %}
+           <a href="{% url 'category_detail' category_id=category.id  %}" 
+              class="px-3 py-2 fs-5 bg-black-25 rounded-3 text-light 
+                     text-decoration-none disable-tap-select hover-scale-4">
+               {{ category.name|title }}
+           </a>
+       {% endfor %}
+   </div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% load static %}
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Simple header</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item mt-3 mt-md-0">
+            <a class="nav-link py-0"
+               href="{% url 'book_list' %}">
+                Книги
+            </a>
+        </li>
+        <li class="nav-item mt-3 mt-md-0">
+            <a class="nav-link py-0"
+               href="{% url 'author_list' %}">
+                Авторы
+            </a>
+        </li>
+        <li class="nav-item mt-3 mt-md-0">
+            <a class="nav-link py-0"
+               href="{% url 'category_list' %}">
+                Категории
+            </a>
+        </li>
+        <li class="nav-item mt-3 mt-md-0">
+            <a class="nav-link py-0"
+               href="{% url 'year_list' %}">
+                Года
+            </a>
+        </li>
+      <li class="d-flex justify-content-center gap-2">
+          {% if request.user.is_authenticated %}
+              <div class="nav-item">
+                  <a class="py-0"
+                     href="{% url 'profile' %}">
+                      <img width="25" height="25"
+                           style="filter: invert(0.5)"
+                           src="{% static 'Core/img/user.png' %}" alt="profile">
+                  </a>
+              </div>
+              <div class="nav-item my-auto">
+                  <a class="py-0"
+                     href="{% url 'signout' %}">
+                      <img width="25" height="25"
+                           style="filter: invert(0.5)"
+                           src="{% static 'Core/img/signout.png' %}" alt="signout">
+                  </a>
+              </div>
+          {% else %}
+              <div class="nav-item my-auto">
+                  <a class="btn btn-secondary py-0"
+                     href="{% url 'signin' %}">
+                      Sign In
+                  </a>
+              </div>
+              <div class="nav-item my-auto">
+                  <a class="btn btn-secondary py-0"
+                     href="{% url 'signup' %}">
+                      Sing Up
+                  </a>
+              </div>
+          {% endif %}
+          <div class="nav-item">
+              <img width="25" height="25"
+                   id="btn-change-theme"
+                   src="{% static 'Core/img/moon.png' %}" alt="theme">
+          </div>
+      </li>
+      </ul>
+    </header>
+  </div>

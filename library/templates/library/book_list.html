@@ -1,0 +1,10 @@
+{% extends 'Core/base.html' %}
+{% block title %}Library | Books{% endblock %}
+{% block content %}
+    <h1 class="text-center mb-4">Books</h1>
+    <div class="frc flex-wrap gap-4 mw-1000px mx-auto">
+        {% for book in books %}
+            {% include 'library/includes/book_card.html' with book=book %}
+        {% endfor %}
+    </div>
+{% endblock %}
